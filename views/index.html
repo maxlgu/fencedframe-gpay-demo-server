@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset='utf-8'></meta>
+    <link rel="stylesheet", href="/static/main.css"></link>
+</head>
+<body>
+    <h1>Cookie demo</h1>
+    <div>
+        <div><span>Cookie: </span><code id='cookieDisplay'></code></div>
+        <button onclick='setCookie()'>Set cookie</button>
+        <button onclick='clearCookie()'>Clear cookie</button>
+    </div>
+</body>
+<script type="text/javascript">
+    function setCookie() {
+       document.cookie = 'fourDigits="1234"';
+       updateDisplay();
+    }
+
+    function clearCookie() {
+        document.cookie = 'fourDigits=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/';
+        updateDisplay();
+    }
+
+    function updateDisplay() {
+         const display = document.getElementById('cookieDisplay');
+         display.textContent = document.cookie;
+    }
+
+    updateDisplay();
+</script>
+</html>
