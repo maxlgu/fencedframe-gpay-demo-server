@@ -15,12 +15,12 @@
 </body>
 <script type="text/javascript">
     function setCookie() {
-       document.cookie = 'fourDigits="1234"';
+       document.cookie = 'fourDigits="1234";SameSite=None;Secure';
        updateDisplay();
     }
 
     function clearCookie() {
-        document.cookie = 'fourDigits=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/';
+        document.cookie = 'fourDigits=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;SameSite=None;Secure';
         updateDisplay();
     }
 

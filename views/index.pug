@@ -5,9 +5,30 @@ html(lang="en")
     meta(charset='utf-8')
     link(rel="stylesheet", href="/static/main.css")
   body
-    p This is a static file serving example.
+    h1 This is a static file serving example.
+    div
+        div
+            span Cookie:
+            code(id='cookieDisplay')
+        button(onclick='setCookie()') Set cookie
+        button(onclick='clearCookie()') Clear cookie
 
 script.
     // If there's cookie, grab the PII info from the cookie
     // Otherwise, display nothing
-    if (document.cookie) 
+    function setCookie() {
+       document.cookie = 'fourDigits="1234";SameSite=None;Secure';
+       updateDisplay();
+    }
+
+    function clearCookie() {
+        document.cookie = 'fourDigits=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;SameSite=None;Secure';
+        updateDisplay();
+    }
+
+    function updateDisplay() {
+         const display = document.getElementById('cookieDisplay');
+         display.textContent = document.cookie;
+    }
+
+    updateDisplay();
