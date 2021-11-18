@@ -23,17 +23,17 @@ const app = express();
 
 // Use the built-in express middleware for serving static files from './public'
 app.use('/static', express.static('public'));
-app.use(express.static(__dirname + '/views'));
+// app.use(express.static(__dirname + '/views'));
 
-app.get('/', (req, res) => {
-  res.setHeader('Supports-Loading-Mode', 'fenced-frame');
-  res.render('index');
-});
-
-// app.get('/',function(req,res) {
+// app.get('/', (req, res) => {
 //   res.setHeader('Supports-Loading-Mode', 'fenced-frame');
-//   res.sendFile(path.join(__dirname, '/views/index.html'));
+//   res.render('index');
 // });
+
+app.get('/',function(req,res) {
+  res.setHeader('Supports-Loading-Mode', 'fenced-frame');
+  res.sendFile(path.join(__dirname, '/views/index.html'));
+});
 
 // Start the server
 const PORT = process.env.PORT || 8080;

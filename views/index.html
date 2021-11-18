@@ -10,25 +10,26 @@
     <div>
         <div><span>Cookie: </span><code id='cookieDisplay'></code></div>
         <button onclick='setCookie()'>Set cookie</button>
+        <button onclick='refresh()'>Refresh cookie</button>
         <button onclick='clearCookie()'>Clear cookie</button>
     </div>
 </body>
 <script type="text/javascript">
     function setCookie() {
        document.cookie = 'fourDigits="1234";SameSite=None;Secure';
-       updateDisplay();
+       refresh();
     }
 
     function clearCookie() {
         document.cookie = 'fourDigits=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;SameSite=None;Secure';
-        updateDisplay();
+        refresh();
     }
 
-    function updateDisplay() {
+    function refresh() {
          const display = document.getElementById('cookieDisplay');
-         display.textContent = document.cookie;
+         display.textContent = document.cookie || "(no cookie)";
     }
 
-    updateDisplay();
+    refresh();
 </script>
 </html>
