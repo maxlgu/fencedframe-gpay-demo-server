@@ -6,6 +6,9 @@
     <!-- <link rel="stylesheet", href="/static/main.css"></link> -->
 </head>
 <body>
+    <img id='master' style="display:none" src='https://www.gstatic.com/travel-booking/credit-card-mastercard.png'/>
+    <img id='visa' style="display:none" src='https://www.gstatic.com/travel-booking/credit-card-visa.png'/>
+    <img id='amex' style="display:none" src='https://www.gstatic.com/travel-booking/credit-card-amex.png'/>
     <div style="background-color:black" >
         <div style="color:white;text-align: center;">
            GPay<span id="pii"></span>
@@ -20,9 +23,21 @@
           acc[decodeURIComponent(v[0].trim())] = decodeURIComponent(v[1].trim());
           return acc;
         }, {});
-        display.textContent = ' | ' + parsedCookie["networkId"] + ' ' + parsedCookie["fourDigits"];
+        const separator = document.createElement('span');
+        separator.textContent = ' | ';
+        display.innerHTML = '';
+        display.appendChild(separator);
+        const network = document.getElementById(parsedCookie["networkId"]);
+        if (network) {
+          network.style.display = 'inline';
+          network.width = 25;
+          display.appendChild(network);
+        }
+        const fourDigits = document.createElement('span');
+        fourDigits.textContent = parsedCookie["fourDigits"];
+        display.appendChild(fourDigits);
       } else {
-         display.textContent = '';
+        display.innerHTML = '';
       }
     }
 
