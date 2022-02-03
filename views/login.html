@@ -19,7 +19,7 @@
         </div>
         <div id='loggedOutSection'>
             <button onclick='clearCookie()'>GPay Logout</button>
-            <p id='cookieDisplay'></p>
+            <p><b>document.cookie</b>: <span id='cookieDisplay'></span></p>
         </div>
         <iframe id='frame' src='fencedframe.html' frameBorder=0 style="height:40px"></iframe>
     </div>
@@ -63,7 +63,7 @@
         }
 
         const display = document.getElementById('cookieDisplay');
-        display.textContent = 'document.cookie: ' + (document.cookie || "(no cookie)");
+        display.textContent = document.cookie || "(no cookie)";
         document.getElementById('frame').contentWindow.location.reload();
     }
 
