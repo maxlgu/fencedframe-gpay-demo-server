@@ -31,7 +31,7 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use('/fencedframe.html', (req, res) => {
+app.use('/fencedframe.html', (req, res, next) => {
   const site = req.headers['top-level-site'];
   if (site && !trustedMerchants.includes(site)) {
     res.sendFile(path.join(__dirname, '/views/gpay.html'));
