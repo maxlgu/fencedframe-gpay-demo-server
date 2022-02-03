@@ -31,14 +31,12 @@
     function setCookie() {
         const cc = document.getElementById("cc").value;
         const fourDigits = cc.substr(cc.length-4);
-        document.cookie = 'gaiaId=1234;SameSite=None;Secure';
         document.cookie = 'fourDigits=...' + fourDigits+';SameSite=None;Secure';
         document.cookie = 'networkId='+document.getElementById("network").value+';SameSite=None;Secure';
         refresh();
     }
 
     function clearCookie() {
-       document.cookie = 'gaiaId=1234;expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;SameSite=None;Secure';
        document.cookie = 'fourDigits=...4337;networkId=visa;expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;SameSite=None;Secure';
        document.cookie = 'networkId=visa;expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;SameSite=None;Secure';
        refresh();
