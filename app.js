@@ -22,7 +22,8 @@ const app = express();
 // app.set('view engine', 'pug');
 
 // Use the built-in express middleware for serving static files from './public'
-app.use('/static', express.static('public'));
+// app.use('/static', express.static('public'));
+app.use(express.static('views'))
 // app.use(express.static(__dirname + '/views'));
 
 // app.get('/', (req, res) => {

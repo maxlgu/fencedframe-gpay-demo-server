@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset='utf-8'></meta>
+    <!-- <link rel="stylesheet", href="/static/main.css"></link> -->
+    <title>GPay login</title>
+</head>
+<body>
+    <div id='container'>
+        <div id='loggedInSection'>
+            <div>
+                <label for="cc">Card Number:</label>
+                <input type="text" id="cc" value='4024007101623055' />
+                <label for="network">Network:</label>
+                <input type="text" id="network" value='visa'/>
+            </div>
+            <button onclick='setCookie()'>GPay Login</button>
+        </div>
+        <div id='loggedOutSection'>
+            <button onclick='clearCookie()'>GPay Logout</button>
+            <p id='cookieDisplay'></p>
+        </div>
+    </div>
+</body>
+<script type="text/javascript">
+    function setCookie() {
+        const cc = document.getElementById("cc").value;
+        const fourDigits = cc.substr(cc.length-4);
+        document.cookie = 'gaiaId=1234;SameSite=None;Secure';
+        document.cookie = 'fourDigits=...' + fourDigits+';SameSite=None;Secure';
+        document.cookie = 'networkId='+document.getElementById("network").value+';SameSite=None;Secure';
+        refresh();
+    }
+
+    function clearCookie() {
+       document.cookie = 'gaiaId=1234;expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;SameSite=None;Secure';
+       document.cookie = 'fourDigits=...4337;networkId=visa;expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;SameSite=None;Secure';
+       document.cookie = 'networkId=visa;expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;SameSite=None;Secure';
+       refresh();
+    }
+
+    function refresh() {
+        var a = document.getElementById("loggedInSection");
+        var b = document.getElementById("loggedOutSection");
+        if (document.cookie) {
+            a.style.display = "none";
+            b.style.display = "block";
+        } else {
+            a.style.display = "block";
+            b.style.display = "none";
+        }
+
+        const display = document.getElementById('cookieDisplay');
+        display.textContent = 'document.cookie: ' + (document.cookie || "(no cookie)");
+        const existingFrame = document.getElementById('frame');
+        if (existingFrame) {
+            existingFrame.remove();
+        }
+        const iframe = document.createElement('iframe');
+        iframe.src = 'fencedframe.html';
+        iframe.frameBorder = 0;
+        iframe.id = 'frame';
+        const container = document.getElementById('container');
+        container.appendChild(iframe);
+    }
+
+    refresh();
+</script>
+</html>

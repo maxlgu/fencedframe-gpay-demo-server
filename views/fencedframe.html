@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset='utf-8'></meta>
+    <!-- <link rel="stylesheet", href="/static/main.css"></link> -->
+</head>
+<body>
+    <div style="background-color:black" >
+        <div style="color:white;text-align: center;">
+           GPay<span id="pii"></span>
+        </div>
+    </div>
+</body>
+<script type="text/javascript">
+    function refresh() {
+      const display = document.getElementById('pii');
+      if (document.cookie) {
+        const parsedCookie = document.cookie.split(';').map(v=>v.split('=')).reduce((acc, v) => {
+          acc[decodeURIComponent(v[0].trim())] = decodeURIComponent(v[1].trim());
+          return acc;
+        }, {});
+        display.textContent = ' | ' + parsedCookie["networkId"] + ' ' + parsedCookie["fourDigits"];
+      } else {
+         display.textContent = '';
+      }
+    }
+
+    refresh();
+</script>
+</html>
