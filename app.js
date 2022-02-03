@@ -17,6 +17,12 @@
 
 const express = require('express');
 const path = require('path');
+const fs = require('fs');
+
+let rawdata = fs.readFileSync(path.resolve(__dirname, 'public/trusted-merchants.json'));
+let trustedMerchants = JSON.parse(rawdata);
+
+
 const app = express();
 
 // app.set('view engine', 'pug');
@@ -25,15 +31,19 @@ app.use((req, res, next) => {
     next();
 });
 
+app.use('/fencedframe.html', (req, res) => {
+  const site = req.headers['top-level-site'];
+  if (site && !trustedMerchants.includes(site)) {
+    res.sendFile(path.join(__dirname, '/views/gpay.html'));
+    return;
+  }
+  next();
+});
+
 // Use the built-in express middleware for serving static files from './public'
 // app.use('/static', express.static('public'));
 app.use(express.static('views'))
 // app.use(express.static(__dirname + '/views'));
-
-// app.get('/', (req, res) => {
-//   res.setHeader('Supports-Loading-Mode', 'fenced-frame');
-//   res.render('index');
-// });
 
 // app.get('/',function(req,res) {
 //   res.setHeader('Supports-Loading-Mode', 'fenced-frame');
