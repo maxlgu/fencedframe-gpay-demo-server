@@ -21,6 +21,10 @@
             <button onclick='clearCookie()'>GPay Logout</button>
             <p id='cookieDisplay'></p>
         </div>
+        <iframe id='frame' src='fencedframe.html' frameBorder=0 style="height:40px"></iframe>
+    </div>
+    <div>
+        Trusted Merchants: <span id='trustedMerchants'></span>
     </div>
 </body>
 <script type="text/javascript">
@@ -53,18 +57,21 @@
 
         const display = document.getElementById('cookieDisplay');
         display.textContent = 'document.cookie: ' + (document.cookie || "(no cookie)");
-        const existingFrame = document.getElementById('frame');
-        if (existingFrame) {
-            existingFrame.remove();
-        }
-        const iframe = document.createElement('iframe');
-        iframe.src = 'fencedframe.html';
-        iframe.frameBorder = 0;
-        iframe.id = 'frame';
-        const container = document.getElementById('container');
-        container.appendChild(iframe);
+        document.getElementById('frame').contentWindow.location.reload();
     }
 
-    refresh();
+    function showTrustedMerchantList() {
+        fetch('./trusted-merchants.json')
+          .then(response => response.json())
+          .then(data => {
+            const trustedMerchants = document.getElementById("trustedMerchants");
+            trustedMerchants.textContent = data;
+          });
+    }
+
+    window.addEventListener('load', (event) => {
+      refresh();
+      showTrustedMerchantList();
+    });
 </script>
 </html>
