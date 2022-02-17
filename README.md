@@ -1,13 +1,5 @@
-# Serving static files in Node.js sample for Google App Engine
-
-This sample demonstrates serving static files in a Node.js app for [Google App Engine](https://cloud.google.com/appengine) Node.js [standard environment](https://cloud.google.com/appengine/docs/standard/nodejs)
-and [flexible environment](https://cloud.google.com/appengine/docs/flexible/nodejs)
-
-## Running locally
-
-Refer to the [appengine/README.md](../README.md) file for instructions on
-running and deploying.
-
+## What is this?
+This is a demo to prototype how Fenced Frame can be used to retain GPay button's card info. This repo is to simulate the GPay server and the frame page that's in the button. Use this together with https://maxlgu.github.io/pr/fencedframe which is the test page (simulating the merchant side).
 
 ## Login
 gcloud auth login
